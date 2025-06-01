@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>プロフィールブック</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0; padding: 0;
+    background: #fffdf8;
+    color: #333;
+  }
+  .book {
+    max-width: 500px;
+    margin: 40px auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  .page {
+    display: none;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .page.active {
+    display: block;
+  }
+  img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  h2 {
+    margin-top: 15px;
+    color: #d65a5a;
+  }
+  p {
+    line-height: 1.5;
+    margin-top: 10px;
+  }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: #f5f5f0;
+  }
+  button {
+    background: #5a8dd6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+  }
+  button:disabled {
+    background: #ccc;
+    cursor: default;
+  }
+  @media (max-width: 600px) {
+    .book {
+      max-width: 90vw;
+      margin: 20px auto;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="book">
+  <div class="page active" id="page1">
+    <img src="https://placehold.jp/400x300.png" alt="プロフィール写真" />
+    <h2>ほなみ</h2>
+    <p>2000年生まれ。健康志向で料理好き。明るくてポジティブ！</p>
+  </div>
+  <div class="page" id="page2">
+    <img src="https://placehold.jp/400x300.png" alt="趣味の写真" />
+    <h2>趣味</h2>
+    <p>読書、特にサスペンス小説が好き。料理のレシピ開発も趣味のひとつ。</p>
+  </div>
+  <div class="page" id="page3">
+    <img src="https://placehold.jp/400x300.png" alt="思い出の写真" />
+    <h2>思い出</h2>
+    <p>ひでとの旅行で訪れた場所の写真。楽しい時間がいっぱい！</p>
+  </div>
+  <div class="nav">
+    <button id="prevBtn" disabled>← 前のページ</button>
+    <button id="nextBtn">次のページ →</button>
+  </div>
+</div>
+
+<script>
+  const pages = document.querySelectorAll('.page');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  let currentPage = 0;
+
+  function updatePage() {
+    pages.forEach((page, i) => {
+      page.classList.toggle('active', i === currentPage);
+    });
+    prevBtn.disabled = currentPage === 0;
+    nextBtn.disabled = currentPage === pages.length - 1;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    if(currentPage > 0) {
+      currentPage--;
+      updatePage();
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if(currentPage < pages.length -1) {
+      currentPage++;
+      updatePage();
+    }
+  });
+</script>
+
+</body>
+</html>
