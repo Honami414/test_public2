@@ -1,45 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profile Book</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Dancing Script', cursive;
+      margin: 0; padding: 0;
+      background: #fff;
+      color: #222;
+    }
+    .book {
+      max-width: 500px;
+      margin: 40px auto;
+      border: 1px solid #444;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      background: #f7f7f7;
+    }
+    .page {
+      display: none;
+      padding: 20px;
+      box-sizing: border-box;
+      color: #222;
+    }
+    .page.active {
+      display: block;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      filter: grayscale(100%);
+      opacity: 0.8;
+    }
+    h2 {
+      margin-top: 15px;
+      color: #111;
+      font-weight: 700;
+      font-size: 2.2rem;
+    }
+    p {
+      line-height: 1.6;
+      margin-top: 10px;
+      color: #333;
+      font-size: 1.2rem;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background: #e0e0e0;
+    }
+    button {
+      background: #444;
+      color: #eee;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 15px;
+      cursor: pointer;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+    button:hover:not(:disabled) {
+      background: #222;
+    }
+    button:disabled {
+      background: #bbb;
+      cursor: default;
+    }
+    @media (max-width: 600px) {
+      .book {
+        max-width: 90vw;
+        margin: 20px auto;
+      }
+    }
+  </style>
+</head>
 <body>
   <div class="book">
     <div class="page active">
-      <h2>プロフィール</h2>
-      <p>ここに自己紹介とか書く感じ！</p>
+      <h2>Profile</h2>
+      <p>Hello! Welcome to our profile book. Here, we share a little about ourselves and our memories.</p>
     </div>
     <div class="page">
-      <h2>趣味</h2>
-      <p>映画観るの好き！筆記体でも読めるようにね！</p>
+      <h2>Hobbies</h2>
+      <p>We love watching movies and traveling, especially exploring new countries together.</p>
     </div>
-    <!-- 他のページも同様 -->
+    <div class="page">
+      <h2>Favorite Foods</h2>
+      <p>We’re big fans of Japanese cuisine, especially simmered pumpkin and sushi.</p>
+    </div>
+    <div class="page">
+      <h2>Message</h2>
+      <p>Thank you for coming to our wedding! We appreciate your support and friendship. Let’s make wonderful memories together.</p>
+    </div>
   </div>
 
   <div class="nav">
-    <button id="prev" disabled>前へ</button>
-    <button id="next">次へ</button>
+    <button id="prev" disabled>Prev</button>
+    <button id="next">Next</button>
   </div>
 
   <script>
     const pages = document.querySelectorAll('.page');
     let current = 0;
 
-    const showPage = (index) => {
-      pages.forEach((p,i) => p.classList.toggle('active', i === index));
+    function showPage(index) {
+      pages.forEach((page, i) => {
+        page.classList.toggle('active', i === index);
+      });
       document.getElementById('prev').disabled = index === 0;
-      document.getElementById('next').disabled = index === pages.length -1;
-    };
+      document.getElementById('next').disabled = index === pages.length - 1;
+    }
 
-    document.getElementById('prev').onclick = () => {
-      if(current > 0) {
+    document.getElementById('prev').addEventListener('click', () => {
+      if (current > 0) {
         current--;
         showPage(current);
       }
-    };
+    });
 
-    document.getElementById('next').onclick = () => {
-      if(current < pages.length -1) {
+    document.getElementById('next').addEventListener('click', () => {
+      if (current < pages.length - 1) {
         current++;
         showPage(current);
       }
-    };
+    });
 
     showPage(current);
   </script>
 </body>
+</html>
